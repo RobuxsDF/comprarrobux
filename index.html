@@ -4,258 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venta de Robux</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Estilos para el botón */
-.buy-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgba(255, 0, 0, 0.8); /* Rojo oscuro */
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    border-radius: 5px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-/* Animación cuando el mouse pasa sobre el botón */
-.buy-button:hover {
-    background-color: rgba(255, 0, 0, 1); /* Rojo intenso */
-    transform: scale(1.1); /* Agrandar el botón */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-}
-
-/* Efecto de "presión" cuando se hace clic en el botón */
-.buy-button:active {
-    transform: scale(0.98); /* Reducir ligeramente el tamaño */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-}
-
-/* Cambio de fondo cuando el mouse está sobre el botón en estado activo */
-.buy-button:focus {
-    outline: none; /* Eliminar contorno */
-    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.8); /* Añadir un borde brillante */
-}
-
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh; /* Asegura que el body ocupe toda la altura */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background-color: #121212; /* Fondo negro como el de YouTube */
-            color: #ffffff;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        h1 {
-            margin-top: 50px;
-            font-size: 3rem;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            padding: 20px;
-            border-radius: 10px; /* Fondo redondeado */
-            animation: fadeIn 2s ease forwards;
-        }
-
-        /* Eliminar fondo del primer párrafo debajo del título */
-        p:first-of-type {
-            font-size: 1.2rem;
-            margin: 20px 0;
-            opacity: 0;
-            padding: 10px;
-            border-radius: 10px; /* Fondo redondeado */
-            animation: fadeIn 2s ease 0.5s forwards;
-            background-color: transparent; /* Quitar fondo */
-        }
-
-        p {
-            font-size: 1.2rem;
-            margin: 20px 0;
-            opacity: 0;
-            background-color: #ff0000; /* Fondo rojo */
-            padding: 10px;
-            border-radius: 10px; /* Fondo redondeado */
-            animation: fadeIn 2s ease 0.5s forwards;
-        }
-
-        .prices {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            opacity: 0;
-            animation: fadeIn 2s ease 1s forwards;
-            width: 100%;
-        }
-
-        .price-card {
-            background: rgba(255, 0, 0, 0.1); /* Fondo rojo con opacidad */
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .price-card:hover {
-            transform: scale(1.05);
-            background: rgba(255, 0, 0, 0.2); /* Fondo rojo más opaco al pasar el mouse */
-        }
-
-        .price-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .price-card p {
-            margin: 5px 0;
-        }
-
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        #loader img {
-            width: 150px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsivo: Ajustes para pantallas más pequeñas */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-
-            .price-card h2 {
-                font-size: 1.2rem;
-            }
-
-            .prices {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            p {
-                font-size: 0.9rem;
-            }
-
-            .prices {
-                grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="loader">
         <img src="png-clipart-white-dragon-black-and-white-curly-red-dragon-spit-fire-creative-text-dragon-removebg-preview.png" alt="Cargando...">
     </div>
 
-    <h1>Venta de Robux - ¡A mitad de precio!</h1>
-    <p>Consigue tus Robux al mejor precio en todas las monedas de Latinoamérica.</p>
+    <header>
+        <h1>Venta de Robux</h1>
+    </header>
 
-    <div class="prices">
-        <div class="price-card">
-            <h2>400 Robux</h2>
-            <p>México: $64.50 MXN</p>
-            <p>Argentina: $360 ARS</p>
-            <p>Chile: $2,800 CLP</p>
-            <p>Colombia: $14,000 COP</p>
-            <p>Perú: S/ 10 PEN</p>
-            <a href=https://robuxsdf.github.io/formulario/" class="buy-button">Comprar</a>
+    <main>
+        <div class="description">
+            <p>¡Compra tus Robux al mejor precio con seguridad y rapidez! Ofrecemos precios accesibles para toda Latinoamérica.</p>
+        </div>
+
+        <div class="prices">
+            <div class="price-card">
+                <h2>400 Robux</h2>
+                <p>México: $64.50 MXN</p>
+                <p>Argentina: $360 ARS</p>
+                <p>Chile: $2,800 CLP</p>
+                <p>Colombia: $14,000 COP</p>
+                <p>Perú: S/ 10 PEN</p>
+            </div>
+            <div class="price-card">
+                <h2>800 Robux</h2>
+                <p>México: $124.50 MXN</p>
+                <p>Argentina: $720 ARS</p>
+                <p>Chile: $5,600 CLP</p>
+                <p>Colombia: $28,000 COP</p>
+                <p>Perú: S/ 20 PEN</p>
+            </div>
+            <div class="price-card">
+                <h2>1,700 Robux</h2>
+                <p>México: $249.50 MXN</p>
+                <p>Argentina: $1,440 ARS</p>
+                <p>Chile: $11,200 CLP</p>
+                <p>Colombia: $56,000 COP</p>
+                <p>Perú: S/ 40 PEN</p>
+            </div>
+            <div class="price-card">
+                <h2>4,500 Robux</h2>
+                <p>México: $624.50 MXN</p>
+                <p>Argentina: $3,600 ARS</p>
+                <p>Chile: $28,000 CLP</p>
+                <p>Colombia: $140,000 COP</p>
+                <p>Perú: S/ 100 PEN</p>
+            </div>
+            <div class="price-card">
+                <h2>10,000 Robux</h2>
+                <p>México: $1,249.50 MXN</p>
+                <p>Argentina: $7,200 ARS</p>
+                <p>Chile: $56,000 CLP</p>
+                <p>Colombia: $280,000 COP</p>
+                <p>Perú: S/ 200 PEN</p>
+            </div>
         </div>
         <div class="price-card">
-            <h2>800 Robux</h2>
-            <p>México: $124.50 MXN</p>
-            <p>Argentina: $720 ARS</p>
-            <p>Chile: $5,600 CLP</p>
-            <p>Colombia: $28,000 COP</p>
-            <p>Perú: S/ 20 PEN</p>
-            <a href=https://robuxsdf.github.io/formulario/" class="buy-button">Comprar</a>
+            <p>
+                ¡No te preocupes! Somos completamente seguros en cuanto a los pagos. Los Robux llegarán sin ningún problema y sin riesgo de baneo, garantizado. El proceso puede tardar entre 2 y 12 horas, por lo que te pedimos paciencia mientras gestionamos tu pedido. ¡Gracias por confiar en nosotros!
+                <br>
+                <br>
+                Atención al cliente vía FACEBOOK:
+                <a href="https://www.facebook.com/awuitade.sandiabv.7/">
+                    <button class="burbuja">Comunicate con nosotros.</button>
+                 </a>
+            </p>
+
         </div>
-        <div class="price-card">
-            <h2>1,700 Robux</h2>
-            <p>México: $249.50 MXN</p>
-            <p>Argentina: $1,440 ARS</p>
-            <p>Chile: $11,200 CLP</p>
-            <p>Colombia: $56,000 COP</p>
-            <p>Perú: S/ 40 PEN</p>
-            <a href=https://robuxsdf.github.io/formulario/" class="buy-button">Comprar</a>
         </div>
-        <div class="price-card">
-            <h2>4,500 Robux</h2>
-            <p>México: $624.50 MXN</p>
-            <p>Argentina: $3,600 ARS</p>
-            <p>Chile: $28,000 CLP</p>
-            <p>Colombia: $140,000 COP</p>
-            <p>Perú: S/ 100 PEN</p>
-            <a href=https://robuxsdf.github.io/formulario/" class="buy-button">Comprar</a>
-        </div>
-        <div class="price-card">
-            <h2>10,000 Robux</h2>
-            <p>México: $1,249.50 MXN</p>
-            <p>Argentina: $7,200 ARS</p>
-            <p>Chile: $56,000 CLP</p>
-            <p>Colombia: $280,000 COP</p>
-            <p>Perú: S/ 200 PEN</p>
-            <a href=https://robuxsdf.github.io/formulario/" class="buy-button">Comprar</a>
-        </div>
-    </div>
+
+        <a href="#" class="buy-button">Comprar Ahora</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Venta de Robux. Todos los derechos reservados.</p>
+    </footer>
 
     <script>
         // Simular pantalla de carga
@@ -263,30 +89,8 @@
             const loader = document.getElementById('loader');
             setTimeout(() => {
                 loader.style.display = 'none';
-
-                // Animar los elementos después de la carga
-                const title = document.querySelector('h1');
-                const paragraphs = document.querySelectorAll('p');
-                const prices = document.querySelector('.prices');
-                
-                // Activar animación para el título
-                title.style.animation = "fadeInUp 2s ease forwards";
-                
-                // Activar animación para los párrafos
-                paragraphs.forEach((p, index) => {
-                    p.style.animation = `fadeInUp 2s ease ${0.5 + (index * 0.2)}s forwards`;
-                });
-
-                // Activar animación para las tarjetas de precios
-                prices.style.animation = "fadeInUp 2s ease 1s forwards";
             }, 3000); // Duración de la pantalla de carga
         };
-
-        // Ejemplo de animación adicional para el título
-        const title = document.querySelector('h1');
-        setInterval(() => {
-            title.style.transform = `scale(${1 + Math.sin(Date.now() / 500) * 0.05})`;
-        }, 50);
     </script>
 </body>
 </html>
